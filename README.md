@@ -10,6 +10,8 @@ This repository contains all the practice work I completed while learning Playwr
 - Page Object Model (POM) structure
 - Form handling and UI validations
 - Navigation & page interaction tests
+- API testing & request handling
+- Authentication setup & storage state reuse
 - Test structure using Playwright Test (describe/test blocks)
 - Course practice assignments converted into automated scripts
 
