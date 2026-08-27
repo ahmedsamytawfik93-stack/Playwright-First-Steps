@@ -1,15 +1,10 @@
-import { test } from '@playwright/test'
+import { test } from '@playwright/test';
 
-export function step(
-    target: object,
-    propertyKey: string | symbol,
-    descriptor: PropertyDescriptor
-): void {
-    const originalMethod = descriptor.value
-
-    descriptor.value = async function (this: unknown, ...args: unknown[]) {
-        return test.step(String(propertyKey), async () => {
-            return originalMethod.apply(this, args)
-        })
-    }
+export function step(target: Function, context: ClassMethodDecoratorContext) {
+  return function replacementMethod(this: any, ...args: any) {
+    const name = this.constructor.name + '.' + (context.name as string);
+    return test.step(name, async () => {
+      return await target.call(this, ...args);
+    });
+  };
 }
